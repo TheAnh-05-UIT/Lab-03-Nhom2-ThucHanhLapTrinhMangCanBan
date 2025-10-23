@@ -8,11 +8,12 @@
 | Phạm Phú Quang  |   24521478     |
 | Trần Minh Hoàng Quân  |   24521454     |
 | Nguyễn Quang Thế Anh   |   24520115     |
-
+| Trần Anh Hào  |   24520462     |
 ## Lab03 Gồm 6 bài tập về lập trình socket
 * Phạm Phú Quang thực hành bài 1 và bài 4
-* Trần Minh Hoàng Quân thực hành bài 3 và bài 6
+* Trần Minh Hoàng Quân thực hành bài 3
 * Nguyễn Quang Thế Anh thực hành bài 2 và bài 5
+* Trần Anh Hào thực hành bài 6
 
 ## Sửa lỗi khi clone code về và không đủ project
 * Bước 1: Mở file .sln trong nodepad
