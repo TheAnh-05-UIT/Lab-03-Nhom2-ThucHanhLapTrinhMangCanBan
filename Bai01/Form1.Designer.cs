@@ -1,6 +1,6 @@
 ﻿namespace Bai01
 {
-    partial class Form1
+    partial class frm_Bai01
     {
         /// <summary>
         /// Required designer variable.
@@ -28,13 +28,47 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.btnClient = new System.Windows.Forms.Button();
+            this.btnServer = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // btnClient
+            // 
+            this.btnClient.Location = new System.Drawing.Point(48, 62);
+            this.btnClient.Name = "btnClient";
+            this.btnClient.Size = new System.Drawing.Size(75, 23);
+            this.btnClient.TabIndex = 0;
+            this.btnClient.Text = "UDPClient";
+            this.btnClient.UseVisualStyleBackColor = true;
+            this.btnClient.Click += new System.EventHandler(this.btnClient_Click);
+            // 
+            // btnServer
+            // 
+            this.btnServer.Location = new System.Drawing.Point(212, 62);
+            this.btnServer.Name = "btnServer";
+            this.btnServer.Size = new System.Drawing.Size(75, 23);
+            this.btnServer.TabIndex = 1;
+            this.btnServer.Text = "UDPServer";
+            this.btnServer.UseVisualStyleBackColor = true;
+            this.btnServer.Click += new System.EventHandler(this.btnServer_Click);
+            // 
+            // frm_Bai01
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(355, 143);
+            this.Controls.Add(this.btnServer);
+            this.Controls.Add(this.btnClient);
+            this.Name = "frm_Bai01";
+            this.Text = "Bai01";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Button btnClient;
+        private System.Windows.Forms.Button btnServer;
     }
 }
 

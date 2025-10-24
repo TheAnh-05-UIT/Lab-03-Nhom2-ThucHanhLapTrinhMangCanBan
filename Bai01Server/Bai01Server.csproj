@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{68085ACA-936C-4B6C-A87A-5FC779D26695}</ProjectGuid>
+    <ProjectGuid>{828D1281-E4A3-4686-8B18-9C5A6B2049F5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Bai01</RootNamespace>
-    <AssemblyName>Bai01</AssemblyName>
+    <RootNamespace>Bai01Server</RootNamespace>
+    <AssemblyName>Bai01Server</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -54,18 +54,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UDPClient.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UDPClient.Designer.cs">
-      <DependentUpon>UDPClient.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UDPServer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UDPServer.Designer.cs">
-      <DependentUpon>UDPServer.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -78,12 +66,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UDPClient.resx">
-      <DependentUpon>UDPClient.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UDPServer.resx">
-      <DependentUpon>UDPServer.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
