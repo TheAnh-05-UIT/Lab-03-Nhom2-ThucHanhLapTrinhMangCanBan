@@ -109,6 +109,7 @@ namespace Bai03
 
         private void ReceiveMessages()
         {
+
             byte[] buffer = new byte[1024];
             int bytesRead;
 
