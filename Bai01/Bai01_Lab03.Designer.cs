@@ -34,9 +34,10 @@
             // 
             // btnClient
             // 
-            this.btnClient.Location = new System.Drawing.Point(48, 62);
+            this.btnClient.Location = new System.Drawing.Point(72, 95);
+            this.btnClient.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnClient.Name = "btnClient";
-            this.btnClient.Size = new System.Drawing.Size(75, 23);
+            this.btnClient.Size = new System.Drawing.Size(112, 35);
             this.btnClient.TabIndex = 0;
             this.btnClient.Text = "UDPClient";
             this.btnClient.UseVisualStyleBackColor = true;
@@ -44,9 +45,10 @@
             // 
             // btnServer
             // 
-            this.btnServer.Location = new System.Drawing.Point(212, 62);
+            this.btnServer.Location = new System.Drawing.Point(318, 95);
+            this.btnServer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnServer.Name = "btnServer";
-            this.btnServer.Size = new System.Drawing.Size(75, 23);
+            this.btnServer.Size = new System.Drawing.Size(112, 35);
             this.btnServer.TabIndex = 1;
             this.btnServer.Text = "UDPServer";
             this.btnServer.UseVisualStyleBackColor = true;
@@ -54,12 +56,14 @@
             // 
             // frm_Bai01
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(355, 143);
+            this.ClientSize = new System.Drawing.Size(532, 220);
             this.Controls.Add(this.btnServer);
             this.Controls.Add(this.btnClient);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frm_Bai01";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bai01";
             this.ResumeLayout(false);
 

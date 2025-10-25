@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -19,16 +20,35 @@ namespace Bai01
         }
         private void InfoMessage(string message)
         {
-            if (ltvReceived.InvokeRequired)
+            try
             {
-                ltvReceived.Invoke(new Action(() => InfoMessage(message)));
-                return;
+                if (ltvReceived.InvokeRequired)
+                {
+                    ltvReceived.Invoke(new Action(() => InfoMessage(message)));
+                    return;
+                }
+
+                if (!ltvReceived.IsDisposed)
+                {
+                    ltvReceived.Items.Add(message);
+                    ltvReceived.EnsureVisible(ltvReceived.Items.Count - 1);
+                }
             }
-            ltvReceived.Items.Add(message);
-            ltvReceived.EnsureVisible(ltvReceived.Items.Count - 1);
+            catch (IOException ex)
+            {
+                MessageBox.Show("Kết nối đến server đã bị mất.");
+            }
+            catch (ObjectDisposedException ex)
+            {
+                MessageBox.Show("Socket đã bị đóng.");
+            }
+            catch (SocketException ex)
+            {
+                MessageBox.Show("Không thể kết nối đến server.");
+            }
         }
 
-        
+
         private void btnListen_Click(object sender, EventArgs e)
         {
             if (listening)
