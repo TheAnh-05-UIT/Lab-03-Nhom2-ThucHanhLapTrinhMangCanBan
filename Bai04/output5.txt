@@ -1,0 +1,5 @@
+﻿Tên phim | Vé bán | Vé tồn | Tỉ lệ bán (%) | Doanh thu |### Xếp hạng
+Đào, phở và piano |      4 |     41 |         8.9% |      225,000 |        1
+Mai |      0 |     30 |         0.0% |            0 |        2
+Gặp lại chị bầu |      0 |     15 |         0.0% |            0 |        3
+Tarot |      0 |     15 |         0.0% |            0 |        4
