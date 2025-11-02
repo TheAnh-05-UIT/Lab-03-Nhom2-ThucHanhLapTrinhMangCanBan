@@ -60,7 +60,7 @@
             this.Controls.Add(this.txt_Listen);
             this.Controls.Add(this.btn_Listen);
             this.Name = "Bai02_Lab03";
-            this.Text = "Form1";
+            this.Text = "Bai02_Lab03";
             this.ResumeLayout(false);
             this.PerformLayout();
 
