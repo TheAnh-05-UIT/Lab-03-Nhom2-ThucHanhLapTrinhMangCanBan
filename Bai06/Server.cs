@@ -46,19 +46,19 @@ namespace Bai06
 
                     if (string.IsNullOrWhiteSpace(username))
                     {
-                        sWriter.WriteLine("Invalid username");
+                        sWriter.WriteLine("Ten khong hop le");
                         tcpClient.Close();
                         continue;
                     }
                     if (dict.ContainsKey(username))
                     {
-                        sWriter.WriteLine("Username already exists");
+                        sWriter.WriteLine("Ten dang nhap da ton tai");
                         tcpClient.Close();
                     }
                     else
                     {
                         dict.Add(username, tcpClient);
-                        UpdateChatHistorySafeCall($"New client connected: {username}");
+                        UpdateChatHistorySafeCall($"Nguoi dung moi tham gia: {username}");
                         var th = new Thread(() => ClientRecv(username, tcpClient));
                         th.IsBackground = true;
                         th.Start();
@@ -102,19 +102,38 @@ namespace Bai06
                 {
                     string line = sReader.ReadLine();
                     if (line == null) break;
-                    foreach (TcpClient otherClient in dict.Values)
+                    if (line.StartsWith("FILE|"))
                     {
+                        string payload = "FILE|" + username + "|" + line.Substring("FILE|".Length);
+                        foreach (TcpClient other in dict.Values)
+                        {
+                            try
+                            {
+                                var sw = new StreamWriter(other.GetStream(), Encoding.UTF8) { AutoFlush = true };
+                                sw.WriteLine(payload);
+                            }
+                            catch { }
+                        }
                         try
                         {
-                            var sw = new StreamWriter(otherClient.GetStream(), Encoding.UTF8) { AutoFlush = true };
-                            sw.WriteLine($"{username}: {line}");
+                            var fname = line.Split('|')[1];
+                            UpdateChatHistorySafeCall($"[FILE] {username} -> ALL: {fname}");
                         }
-                        catch
-                        {
-
-                        }
+                        catch { }
                     }
-                    UpdateChatHistorySafeCall($"{username}: {line}");
+                    else
+                    {
+                        foreach (TcpClient other in dict.Values)
+                        {
+                            try
+                            {
+                                var sw = new StreamWriter(other.GetStream(), Encoding.UTF8) { AutoFlush = true };
+                                sw.WriteLine($"{username}: {line}");
+                            }
+                            catch { }
+                        }
+                        UpdateChatHistorySafeCall($"{username}: {line}");
+                    }
                 }
                 catch
                 {
@@ -124,7 +143,7 @@ namespace Bai06
             if (dict.ContainsKey(username))
             {
                 dict.Remove(username);
-                UpdateChatHistorySafeCall($"{username} left the group.");
+                UpdateChatHistorySafeCall($"{username} roi chat.");
             }
             try { tcpClient.Close(); } catch { }
         }

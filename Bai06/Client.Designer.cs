@@ -36,6 +36,7 @@
             this.sendMsgBox = new System.Windows.Forms.RichTextBox();
             this.sendButton = new System.Windows.Forms.Button();
             this.msgBox = new System.Windows.Forms.RichTextBox();
+            this.sendFileButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // usernameBox
@@ -87,13 +88,13 @@
             // 
             this.sendMsgBox.Location = new System.Drawing.Point(15, 374);
             this.sendMsgBox.Name = "sendMsgBox";
-            this.sendMsgBox.Size = new System.Drawing.Size(615, 42);
+            this.sendMsgBox.Size = new System.Drawing.Size(507, 42);
             this.sendMsgBox.TabIndex = 8;
             this.sendMsgBox.Text = "";
             // 
             // sendButton
             // 
-            this.sendButton.Location = new System.Drawing.Point(659, 374);
+            this.sendButton.Location = new System.Drawing.Point(557, 374);
             this.sendButton.Name = "sendButton";
             this.sendButton.Size = new System.Drawing.Size(98, 42);
             this.sendButton.TabIndex = 9;
@@ -109,11 +110,22 @@
             this.msgBox.TabIndex = 10;
             this.msgBox.Text = "";
             // 
+            // sendFileButton
+            // 
+            this.sendFileButton.Location = new System.Drawing.Point(676, 374);
+            this.sendFileButton.Name = "sendFileButton";
+            this.sendFileButton.Size = new System.Drawing.Size(98, 42);
+            this.sendFileButton.TabIndex = 11;
+            this.sendFileButton.Text = "Send File";
+            this.sendFileButton.UseVisualStyleBackColor = true;
+            this.sendFileButton.Click += new System.EventHandler(this.sendFileButton_Click);
+            // 
             // Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.sendFileButton);
             this.Controls.Add(this.msgBox);
             this.Controls.Add(this.sendButton);
             this.Controls.Add(this.sendMsgBox);
@@ -138,6 +150,7 @@
         private System.Windows.Forms.RichTextBox sendMsgBox;
         private System.Windows.Forms.Button sendButton;
         private System.Windows.Forms.RichTextBox msgBox;
+        private System.Windows.Forms.Button sendFileButton;
     }
 
 }
