@@ -49,6 +49,7 @@
             this.txt_Listen.Location = new System.Drawing.Point(108, 123);
             this.txt_Listen.Multiline = true;
             this.txt_Listen.Name = "txt_Listen";
+            this.txt_Listen.ReadOnly = true;
             this.txt_Listen.Size = new System.Drawing.Size(600, 274);
             this.txt_Listen.TabIndex = 1;
             // 
@@ -60,6 +61,7 @@
             this.Controls.Add(this.txt_Listen);
             this.Controls.Add(this.btn_Listen);
             this.Name = "Bai02_Lab03";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bai02_Lab03";
             this.ResumeLayout(false);
             this.PerformLayout();
