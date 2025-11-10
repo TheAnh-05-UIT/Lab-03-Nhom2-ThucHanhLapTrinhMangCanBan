@@ -31,3 +31,4 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bai06", "Bai06\Bai06.csproj
 EndProject
 ```
 * Bước 3: Lưu file .sln và chạy lại project
+## Nếu gặp lỗi khi chạy project, lỗi chi tiết sẻ được ghi trong báo cáo 
