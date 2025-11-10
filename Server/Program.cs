@@ -10,7 +10,7 @@ using System.Threading;
 class Server
 {
     const int PORT = 3000;
-    const string DB_FILE = "homnayangi.db";
+    const string DB_FILE = "HomNayAnGiDay.db";
     static string connectionString = $"Data Source={DB_FILE};";
 
     static void Main(string[] args)
