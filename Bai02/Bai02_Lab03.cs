@@ -59,7 +59,17 @@ namespace Bai02
 
                         if (!txt_Listen.IsDisposed)
                         {
-                            txt_Listen.Invoke(new Action(() => txt_Listen.AppendText(text)));
+                            try
+                            {
+                                txt_Listen.Invoke(new Action(() => txt_Listen.AppendText(text)));
+                            }
+                            catch (ObjectDisposedException ex)
+                            {
+                                this.Invoke(new Action(() =>
+                                {
+                                    MessageBox.Show("Mất kết nối đến server: " + ex.Message);
+                                }));
+                            }
                         }
                     }
                     catch (SocketException ex)
@@ -72,7 +82,7 @@ namespace Bai02
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Lỗi không xác định: " + ex.Message);
+                        MessageBox.Show("dịch vụ telnet đã bị đóng: " + ex.Message);
                     }
                 }
                 txt_Listen.AppendText(Environment.NewLine);
@@ -81,6 +91,7 @@ namespace Bai02
 
             CheckForIllegalCrossThreadCalls = false;
             Thread serverThread = new Thread(new ThreadStart(StartUnsafeThread));
+            serverThread.IsBackground = true;
             serverThread.Start();
         }
     }
