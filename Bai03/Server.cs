@@ -17,7 +17,8 @@ namespace Bai03
     {
         private TcpListener listener;
         private Thread listenerThread;
-        private TcpClient client;
+        private volatile bool isRunning = false;
+
         public Server()
         {
             InitializeComponent();
@@ -27,66 +28,77 @@ namespace Bai03
         {
             try
             {
-                IPAddress ip = IPAddress.Parse("127.0.0.1");
-                int port = 8000;
+                if (isRunning) return;
 
-                listener = new TcpListener(ip, port);
+                listener = new TcpListener(IPAddress.Any, 8000);
+                listener.Start();
+                isRunning = true;
 
-                listenerThread = new Thread(new ThreadStart(StartListening));
+                listenerThread = new Thread(ListenLoop);
                 listenerThread.IsBackground = true;
                 listenerThread.Start();
 
-                rtxt_Show.AppendText("Connection accepted from 127.0.0.1:8000" + Environment.NewLine);
+                AppendText("Server started on port 8000...");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khởi động server: " + ex.Message);
+                MessageBox.Show(ex.Message);
             }
         }
 
-        private void StartListening()
+        private void ListenLoop()
         {
             try
             {
-                listener.Start();
-                while (true) 
+                while (isRunning)
                 {
-                    client = listener.AcceptTcpClient();
+                    TcpClient client;
 
-                    rtxt_Show.AppendText("Server started!" + Environment.NewLine);
+                    try
+                    {
+                        client = listener.AcceptTcpClient();
+                    }
+                    catch (SocketException)
+                    {
+                        if (!isRunning) break;
+                        throw;
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        break;
+                    }
 
-                    Thread clientThread = new Thread(() => HandleClient(client));
-                    clientThread.IsBackground=true;
-                    clientThread.Start();
+                    AppendText("Client connected: " +
+                               client.Client.RemoteEndPoint);
+
+                    Thread t = new Thread(() => HandleClient(client));
+                    t.IsBackground = true;
+                    t.Start();
                 }
-            }
-            catch (SocketException e)
-            {
-                MessageBox.Show("Lỗi Socket: " + e.Message);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi trong StarListening: " + ex.Message );
+                AppendText("ListenLoop error: " + ex.Message);
             }
         }
 
         private void HandleClient(TcpClient client)
         {
-            NetworkStream stream = client.GetStream();
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-
             try
             {
-                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) != 0)
+                NetworkStream stream = client.GetStream();
+                byte[] buffer = new byte[1024];
+                int bytes;
+
+                while ((bytes = stream.Read(buffer, 0, buffer.Length)) > 0)
                 {
-                    string data = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                    rtxt_Show.AppendText($"[Client]: {data}" + Environment.NewLine);
+                    string msg = Encoding.UTF8.GetString(buffer, 0, bytes);
+                    AppendText("[Client]: " + msg);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                rtxt_Show.AppendText("Client đã ngắt kết nối hoặc lỗi!");
+                AppendText("Client disconnected.");
             }
             finally
             {
@@ -94,19 +106,27 @@ namespace Bai03
             }
         }
 
+        private void AppendText(string msg)
+        {
+            if (!IsHandleCreated || IsDisposed) return;
+
+            if (rtxt_Show.InvokeRequired)
+            {
+                rtxt_Show.Invoke(new Action<string>(AppendText), msg);
+            }
+            else
+            {
+                rtxt_Show.AppendText(msg + Environment.NewLine);
+            }
+        }
+
         private void Server_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (listener != null)
+            isRunning = false;
+            listener?.Stop();
+            if (listenerThread != null && listenerThread.IsAlive)
             {
-                listener.Stop();
-            }
-            if (listenerThread != null)
-            {
-                listenerThread.Abort();
-            }
-            if (client != null)
-            {
-                client.Close();
+                listenerThread.Join(500);
             }
         }
     }
